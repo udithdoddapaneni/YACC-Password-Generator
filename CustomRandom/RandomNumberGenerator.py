@@ -5,7 +5,7 @@ def Linear_Congruential_Generator(seed, a=1664525, c=1013904223, m=2**32):
 		seed = (a * seed + c) % m
 		yield seed
 
-def RandInt(a, b):
+def Randint(a, b):
 	try:
 		if a > b:
 			raise ValueError("Lower bound must be less than or equal to upper bound")
