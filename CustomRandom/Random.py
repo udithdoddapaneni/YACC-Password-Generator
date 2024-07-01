@@ -3,16 +3,16 @@ from RandomNumberGenerator import Randint
 def RandomChoice(s):
 	try:
 		if not isinstance(s, list):
-			raise TypeError("Expected a list")
+			raise TypeError("only list is expected")
 		if not s:
-			raise ValueError("List v must not be empty")
+			raise ValueError("list should not be empty")
 		index = Randint(0, len(s) - 1)
 		return s[index]
-	except ValueError as s:
-		print(f"Error occurred : {s}")
+	except ValueError as v:
+		print(f"Error occurred : {v}")
 		return None
 	except TypeError as t:
-		print(f"Error occurred : {s}")
+		print(f"Error occurred : {t}")
 		return None
 
 
@@ -20,7 +20,7 @@ def RandomChoice(s):
 def RandomShuffle(s: list):
 	try:
 		if not isinstance(s, list):
-			raise TypeError("Expected a list")
+			raise TypeError("only list is expected")
 		if len(s) <= 1:
 			return
 		n = len(s)
@@ -28,5 +28,5 @@ def RandomShuffle(s: list):
 			j = Randint( 0, i)
 			s[i], s[j] = s[j], s[i]
 	except TypeError as t:
-		print(f"Error occurred : {v}")
+		print(f"Error: {t}")
 		return None
