@@ -25,7 +25,7 @@ def RandomShuffle(s: list):
 			return
 		n = len(s)
 		for i in range(n - 1, 0, -1):
-			j = RandInt( 0, i)
+			j = Randint( 0, i)
 			s[i], s[j] = s[j], s[i]
 	except TypeError as t:
 		print(f"Error occurred : {v}")
