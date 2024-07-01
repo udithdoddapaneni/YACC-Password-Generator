@@ -1,6 +1,6 @@
-from pseudorandom import RandInt
+from RandomNumberGenerator import Randint
 
-def randomchoice(v):
+def RandomChoice(v):
 	try:
 		if not isinstance(v, list):
 			raise TypeError("Expected a list")
@@ -17,7 +17,7 @@ def randomchoice(v):
 
 
 
-def randshuffle(s: list):
+def RandomShuffle(s: list):
 	try:
 		if not isinstance(v, list):
 			raise TypeError("Expected a list")
