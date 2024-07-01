@@ -6,7 +6,7 @@ def RandomChoice(v):
 			raise TypeError("Expected a list")
 		if not v:
 			raise ValueError("List v must not be empty")
-		index = RandInt(0, len(v) - 1)
+		index = Randint(0, len(v) - 1)
 		return v[index]
 	except ValueError as v:
 		print(f"Error occurred : {v}")
