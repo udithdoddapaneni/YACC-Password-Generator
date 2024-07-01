@@ -19,7 +19,7 @@ def RandomChoice(v):
 
 def RandomShuffle(s: list):
 	try:
-		if not isinstance(v, list):
+		if not isinstance(s, list):
 			raise TypeError("Expected a list")
 		if len(s) <= 1:
 			return
