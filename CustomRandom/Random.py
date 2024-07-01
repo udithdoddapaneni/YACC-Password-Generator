@@ -1,17 +1,32 @@
-from RandomNumberGenerator import Randint
+from pseudorandom import RandInt
 
-def RandomChoice(s):
-    """
-    replicate choice function from the inbuilt random module using
-    the Randint fuction
+def randomchoice(v):
+	try:
+		if not isinstance(v, list):
+			raise TypeError("Expected a list")
+		if not v:
+			raise ValueError("List v must not be empty")
+		index = RandInt(0, len(v) - 1)
+		return v[index]
+	except ValueError as v:
+		print(f"Error occurred : {v}")
+		return None
+	except TypeError as t:
+		print(f"Error occurred : {v}")
+		return None
 
-    s is a non-empty sequence
-    """
 
-def RandomShuffle(s: list):
-    """
-    replicate shuffle function from the inbuilt random module using
-    the Randint function
 
-    s is a list
-    """
+def randshuffle(s: list):
+	try:
+		if not isinstance(v, list):
+			raise TypeError("Expected a list")
+		if len(s) <= 1:
+			return
+		n = len(s)
+		for i in range(n - 1, 0, -1):
+			j = RandInt( 0, i)
+			s[i], s[j] = s[j], s[i]
+	except TypeError as t:
+		print(f"Error occurred : {v}")
+		return None
