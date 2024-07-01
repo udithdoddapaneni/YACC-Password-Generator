@@ -1,18 +1,18 @@
 from RandomNumberGenerator import Randint
 
-def RandomChoice(v):
+def RandomChoice(s):
 	try:
-		if not isinstance(v, list):
+		if not isinstance(s, list):
 			raise TypeError("Expected a list")
-		if not v:
+		if not s:
 			raise ValueError("List v must not be empty")
-		index = Randint(0, len(v) - 1)
-		return v[index]
-	except ValueError as v:
-		print(f"Error occurred : {v}")
+		index = Randint(0, len(s) - 1)
+		return s[index]
+	except ValueError as s:
+		print(f"Error occurred : {s}")
 		return None
 	except TypeError as t:
-		print(f"Error occurred : {v}")
+		print(f"Error occurred : {s}")
 		return None
 
 
