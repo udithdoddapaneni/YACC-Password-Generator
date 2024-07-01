@@ -16,7 +16,7 @@ def generate_password(password_range : list , min_uppercase , min_lowercase, min
         raise ValueError("The maximum length is too short for the given requirements.")
     
     # Determine the length of the password within the provided range
-    password_length = random.randint(min_length, max_length)
+    password_length = random.randint(total_min_required, max_length)
     
     # Create pools of characters create upper_chars , lower_chars , digit_chars , symbol_chars , remaining_chars
     
