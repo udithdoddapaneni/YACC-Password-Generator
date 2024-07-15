@@ -68,7 +68,7 @@ st.set_page_config(
 #         "password min Length", min_value=total_min_required, max_value=32
 #     )
 #     max_length = st.slider(
-#         "password max Length", min_value=min_length + 1, max_value=32
+#         "password max Length", min_value=min_length, max_value=32
 #     )
 
 #     if st.button("Generate Password"):
@@ -87,7 +87,7 @@ st.set_page_config(
 
 # elif page == "About":
 #     st.header("About Us")
-#     st.write("This is a Simple Password generator apo using Streamlit")
+#     st.write("This is a Simple Password generator app using Streamlit")
 
 
 # VERSION 2
