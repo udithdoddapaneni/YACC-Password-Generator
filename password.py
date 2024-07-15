@@ -193,7 +193,7 @@ with tab1:
         "password min Length", min_value=total_min_required, max_value=32
     )
     max_length = st.slider(
-        "password max Length", min_value=min_length + 1, max_value=32
+        "password max Length", min_value=min_length, max_value=32
     )
 
     if st.button("Generate Password"):
