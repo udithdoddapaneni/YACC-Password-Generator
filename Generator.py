@@ -1,33 +1,47 @@
 import random
-import string 
+import string
 
 
-def GeneratePassword(password_range, min_uppercase, min_lowercase, min_digits, min_symbols):
+def generate_password(
+    password_range: list, min_uppercase, min_lowercase, min_digits, min_symbols
+):
     """
     password_range is list of two integers
     this function returns a string following the above parameters
     """
-    length_of_password=(range_password[0]+range_password[1])/2
-    length_req=minCount_upper+minCount_lower+minCount_digits+minCount_symbols
 
-    if length_of_password<length_req:
-        return "Password length insufficient"
-    
-    remaining_length=abs(length_of_password-length_req)
+    min_length, max_length = password_range
 
-    upper=string.ascii_uppercase
-    lower=string.ascii_lowercase
-    punctuations=string.punctuation
-    digits=string.digits
+    total_min_required = min_uppercase + min_lowercase + min_digits + min_symbols
 
-    mixture=upper+lower+punctuations+digits
+    # Ensure the password length is sufficient
+    if total_min_required > max_length:
+        raise ValueError("The maximum length is too short for the given requirements.")
 
-    list_mixture=list(mixture)
-    random.shuffle(list_mixture)
-    shuffled_mixture="".join(list_mixture)
+    # Determine the length of the password within the provided range
+    password_length = random.randint(min_length, max_length)
 
-    list_pass=random.choices(shuffled_mixture,k=length_req)
-    list_pass.extend(random.choices(shuffled_mixture,k=int(remaining_length)))
-    password="".join(list_pass)
+    # Create pools of characters create upper_chars , lower_chars , digit_chars , symbol_chars , remaining_chars
 
+    upper_chars = "".join(
+        random.choices(string.ascii_letters[26:], k=min_uppercase)
+    )  # used string slicing to get characters
+    lower_chars = "".join(random.choices(string.ascii_letters[:26], k=min_lowercase))
+    digit_chars = "".join(random.choices(string.digits, k=min_digits))
+    symbol_chars = "".join(random.choices(string.punctuation, k=min_symbols))
+    total_min_required = len(upper_chars + lower_chars + symbol_chars + digit_chars)
+    # Ensure remaining characters are randomly chosen from all pools
+    remaining_length = password_length - total_min_required
+    all_chars = string.ascii_letters + string.digits + string.punctuation
+    remaining_chars = "".join(random.choices(all_chars, k=remaining_length))
+
+    # Combine all characters and shuffle them to ensure randomness
+    password = upper_chars + lower_chars + symbol_chars + digit_chars + remaining_chars
+
+    random.shuffle(list(password))  # converting to list to shuffle
+    password = "".join(password)  # back to a string
+    # Join the list to form the final password string
     return password
+
+
+# define the main function and print the final output
