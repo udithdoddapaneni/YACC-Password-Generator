@@ -1,7 +1,5 @@
 from CustomRandom.RandomNumberGenerator import Randint
 
-import random
-
 def RandomChoice(sequence):
 
     length = len(sequence)
@@ -9,7 +7,7 @@ def RandomChoice(sequence):
     if(length==0):
         return "Sequence is Empty"
 
-    random_index = random.randint(0,length-1)
+    random_index = Randint(0,length-1)
 
     return sequence[random_index]
 
@@ -23,7 +21,7 @@ def RandomShuffle(list_to_shuffle):
 
     for i in range(0,length-1,1):
 
-        j = random.randint(i,length-1)
+        j = Randint(i,length-1)
 
         list_to_shuffle[i], list_to_shuffle[j] = list_to_shuffle[j], list_to_shuffle[i]
 
@@ -46,7 +44,7 @@ def RandomChoices(sequence,k):
 
     while(len(result_list)<k):
 
-        random_index = random.randint(0,length-1)
+        random_index = Randint(0,length-1)
         if random_index in index_list:
             continue
         else:
