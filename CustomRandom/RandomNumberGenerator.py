@@ -63,10 +63,17 @@ current_time = int(datetime.now().timestamp())
 mt = MersenneTwister(seed=current_time)
 
 def Randint(a, b):
+<<<<<<< HEAD
     """
     Returns a random integer between a and b inclusive.
     """
     return mt.randint(a, b)
+=======
+    num_instances = 1000
+    seed = int(time.time() * 10000000) 
+    seq = int(time.time() * 1000000) 
+    pcgs = [PCG(seed + i, seq + i) for i in range(num_instances)]
+>>>>>>> 6ccc570627628eda00c1a2328818483d217b7f49
 
 
 
