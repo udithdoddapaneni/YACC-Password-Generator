@@ -1,53 +1,96 @@
-import time
-import os
+import string
+from datetime import datetime
 
-class PCG:
-    def __init__(self, seed, seq):
-        self.state = seed
-        self.inc = (seq << 1) | 1
 
-    def next(self):
-        self.state = (self.state * 6364136223846793005 + self.inc) & 0xFFFFFFFFFFFFFFFF
-        xorshifted = ((self.state >> 18) ^ self.state) >> 27
-        rot = self.state >> 59
-        return (xorshifted >> rot) | (xorshifted << ((-rot) & 31))
+class MersenneTwister:
+    def __init__(self, seed=5489):
+        self.w, self.n, self.m, self.r = 32, 624, 397, 31
+        self.a = 0x9908B0DF
+        self.u, self.d = 11, 0xFFFFFFFF
+        self.s, self.b = 7, 0x9D2C5680
+        self.t, self.c = 15, 0xEFC60000
+        self.l = 18
+        self.f = 1812433253
+
+        # Create a length n array to store the state of the generator
+        self.MT = [0] * self.n
+        self.index = self.n
+        self.lower_mask = (1 << self.r) - 1
+        self.upper_mask = (~self.lower_mask) & self.d
+
+        # Initialize the generator from a seed
+        self.MT[0] = seed
+        for i in range(1, self.n):
+            self.MT[i] = self.int_32(
+                self.f * (self.MT[i - 1] ^ (self.MT[i - 1] >> (self.w - 2))) + i
+            )
+
+    # Extract a tempered value based on MT[index]
+    # calling twist() every n numbers
+    def extract_number(self):
+        if self.index >= self.n:
+            if self.index > self.n:
+                raise Exception("Generator was never seeded")
+            self.twist()
+
+        y = self.MT[self.index]
+        y = y ^ ((y >> self.u) & self.d)
+        y = y ^ ((y << self.s) & self.b)
+        y = y ^ ((y << self.t) & self.c)
+        y = y ^ (y >> self.l)
+
+        self.index += 1
+        return self.int_32(y)
+
+    # Generate the next n values from the series x_i
+    def twist(self):
+        for i in range(self.n):
+            x = (self.MT[i] & self.upper_mask) + (self.MT[(i + 1) % self.n] & self.lower_mask)
+            xA = x >> 1
+            if x % 2 != 0:
+                xA = xA ^ self.a
+            self.MT[i] = self.MT[(i + self.m) % self.n] ^ xA
+        self.index = 0
+
+    def int_32(self, number):
+        return int(number) & 0xFFFFFFFF
+
+    def randint(self, a, b):
+        return a + self.extract_number() % (b - a + 1)
+
+# Use the current time to seed the Mersenne Twister
+current_time = int(datetime.now().timestamp())
+mt = MersenneTwister(seed=current_time)
 
 def Randint(a, b):
-    num_instances = 4
-    pcgs = []
-    for _ in range(num_instances):
-        seed = int(time.time() * 1000) ^ int.from_bytes(os.urandom(8), 'big')
-        seq = int(time.time() * 1000000) ^ int.from_bytes(os.urandom(8), 'big')
-        pcgs.append(PCG(seed, seq))
+    """
+    Returns a random integer between a and b inclusive.
+    """
+    return mt.randint(a, b)
 
-    result = 0
-    for pcg in pcgs:
-        result ^= pcg.next()
 
-    return a + result % (b - a + 1)
 
-# def test_pseudo_random_numbers(loops, start, end):
-#     test_dict = {}
-    
-#     for _ in range(loops):
-#         random_number = Randint(start, end)
+
+# import unittest
+# class TestRandint(unittest.TestCase):
+#     def setUp(self):
+#         # Seed the Mersenne Twister with the current time for testing
+#         current_time = int(datetime.now().timestamp())
+#         self.mt = MersenneTwister(seed=current_time)
+
+#     def test_value_occurrences(self):
+#         occurrences = {}
+#         for _ in range(10000):
+#             result = self.mt.randint(1, 100)
+#             if result in occurrences:
+#                 occurrences[result] += 1
+#             else:
+#                 occurrences[result] = 1
         
-#         if random_number in test_dict:
-#             test_dict[random_number] += 1
-#         else:
-#             test_dict[random_number] = 1
-    
-#     return test_dict
+#         print("Occurrences of each number:")
+#         for number, count in occurrences.items():
+#             print(f"Number {number} occurs {count} times")
 
-
-# no_iterations = 1000
-# start = 1
-# end = 10
-
-
-# occurrences_dict = test_pseudo_random_numbers(no_iterations, start, end)
-
-
-# print("Occurrences of random numbers:")
-# for number, count in occurrences_dict.items():
-#     print(f"Number {number}: {count} times")
+# # Run the tests
+# if __name__ == "__main__":
+#     unittest.main()
