@@ -13,12 +13,10 @@ class PCG:
         return (xorshifted >> rot) | (xorshifted << ((-rot) & 31))
 
 def Randint(a, b):
-    num_instances = 4
-    pcgs = []
-    for _ in range(num_instances):
-        seed = int(time.time() * 1000) ^ int.from_bytes(os.urandom(8), 'big')
-        seq = int(time.time() * 1000000) ^ int.from_bytes(os.urandom(8), 'big')
-        pcgs.append(PCG(seed, seq))
+    num_instances = 1000
+    seed = int(time.time() * 10000000) 
+    seq = int(time.time() * 1000000) 
+    pcgs = [PCG(seed + i, seq + i) for i in range(num_instances)]
 
     result = 0
     for pcg in pcgs:
