@@ -1,4 +1,4 @@
-import random
+from CustomRandom.Random import Randint, RandomChoice, RandomChoices, RandomShuffle
 import string
 def generate_password(password_range : list , min_uppercase , min_lowercase, min_digits, min_symbols):
     
@@ -19,23 +19,23 @@ def generate_password(password_range : list , min_uppercase , min_lowercase, min
         raise ValueError("The minimum length is too short for the given requirements.")
     
     # Determine the length of the password within the provided range
-    password_length = random.randint(max(total_min_required, min_length), max_length)
+    password_length = Randint(max(total_min_required, min_length), max_length)
     
     # Create pools of characters create upper_chars , lower_chars , digit_chars , symbol_chars , remaining_chars
-    upper_chars="".join(random.choices(string.ascii_letters[26:],k=min_uppercase))    #used string slicing to get characters
-    lower_chars="".join(random.choices(string.ascii_letters[:26],k=min_lowercase))
-    digit_chars="".join(random.choices(string.digits,k=min_digits))
-    symbol_chars="".join(random.choices(string.punctuation,k=min_symbols))
+    upper_chars="".join(RandomChoices(string.ascii_letters[26:],k=min_uppercase))    #used string slicing to get characters
+    lower_chars="".join(RandomChoices(string.ascii_letters[:26],k=min_lowercase))
+    digit_chars="".join(RandomChoices(string.digits,k=min_digits))
+    symbol_chars="".join(RandomChoices(string.punctuation,k=min_symbols))
     total_min_required=len(upper_chars+lower_chars+symbol_chars+digit_chars)  
     
     # Ensure remaining characters are randomly chosen from all pools
     remaining_length = password_length - total_min_required
     all_chars = string.ascii_letters + string.digits + string.punctuation       
-    remaining_chars = "".join(random.choices(all_chars, k=remaining_length))
+    remaining_chars = "".join(RandomChoices(all_chars, k=remaining_length))
     
     # Combine all characters and shuffle them to ensure randomness
     password_list = list(upper_chars + lower_chars + digit_chars + symbol_chars + remaining_chars)
-    random.shuffle(password_list)
+    RandomShuffle(password_list)
     password = "".join(password_list)
     # Return the password
     return password
