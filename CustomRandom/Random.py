@@ -1,4 +1,4 @@
-from RandomNumberGenerator import Randint
+from CustomRandom.RandomNumberGenerator import Randint
 
 import random
 
