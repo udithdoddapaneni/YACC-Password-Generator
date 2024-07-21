@@ -8,7 +8,6 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
-
 # VERSION 2
 
 tab1, tab2 = st.tabs(["Password Generator", "About Us"])
