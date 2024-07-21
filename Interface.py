@@ -20,20 +20,20 @@ with tab1:
             min_upper = int(
                 st.number_input(
                     "Min UpperCase Characters",
-                    min_value=0.0,
-                    max_value=30.0,
-                    value=3.0,
-                    step=1.0,
+                    min_value=0,
+                    max_value=25,
+                    value=3,
+                    step=1,
                     help="Minimum number of uppercase letters in the password",
                 )
             )
             min_lower = int(
                 st.number_input(
                     "Min Lowercase Characters",
-                    min_value=0.0,
-                    max_value=30.0,
-                    value=3.0,
-                    step=1.0,
+                    min_value=0,
+                    max_value=25,
+                    value=3,
+                    step=1,
                     help="Minimum number of lowercase letters in the password",
                 )
             )
@@ -41,30 +41,45 @@ with tab1:
             min_digit = int(
                 st.number_input(
                     "Min digits",
-                    min_value=0.0,
-                    max_value=30.0,
-                    value=3.0,
-                    step=1.0,
+                    min_value=0,
+                    max_value=25,
+                    value=3,
+                    step=1,
                     help="Minimum number of digits in the password",
                 )
             )
             min_symbol = int(
                 st.number_input(
                     "Min symbols",
-                    min_value=0.0,
-                    max_value=30.0,
-                    value=3.0,
-                    step=1.0,
+                    min_value=0,
+                    max_value=25,
+                    value=3,
+                    step=1,
                     help="Minimum number of symbols in the password",
                 )
             )
 
     total_min_required = min_upper + min_lower + min_digit + min_symbol
 
-    min_length = st.slider(
-        "password min Length", min_value=total_min_required, max_value=32
-    )
-    max_length = st.slider("password max Length", min_value=min_length, max_value=32)
+    if total_min_required < 100:
+        min_length = st.slider(
+            "Password Min Length", min_value=total_min_required, max_value=100
+        )
+
+        if min_length == 100:
+            st.warning(
+                "Maximum length of password is 100. Max Lenth Slider has been disabled."
+            )
+            max_length = 100
+        else:
+            max_length = st.slider(
+                "Password Max Length",
+                min_value=min_length,
+                max_value=100,
+            )
+    else:
+        min_length = max_length = 100
+        st.warning("Maximum length of password is 100. Sliders have been disabled.")
 
     if st.button("Generate Password"):
         password = generate_password(
@@ -83,4 +98,13 @@ with tab1:
 
 with tab2:
     st.header("About Us")
-    st.write("This is a Simple Password Generator app using Streamlit")
+    st.write("Welcome to the 𝐏𝐚𝐬𝐬𝐰𝐨𝐫𝐝 𝐆𝐞𝐧𝐞𝐫𝐚𝐭𝐨𝐫 app!")
+    st.write(
+        "This application was developed by 𝐘𝐞𝐭 𝐀𝐧𝐨𝐭𝐡𝐞𝐫 𝐂𝐨𝐝𝐢𝐧𝐠 𝐂𝐥𝐮𝐛 (𝐘𝐀𝐂𝐂) at 𝐈𝐈𝐓 𝐏𝐚𝐥𝐚𝐤𝐤𝐚𝐝."
+    )
+    st.write(
+        "We welcome any questions, feedback, or suggestions you might have. Your input helps us improve and innovate."
+    )
+    st.write(
+        "Thank you for using our Password Generator app. We hope it serves you well in generating secure and reliable passwords!"
+    )
