@@ -1,13 +1,13 @@
-Password Generator
+# Password Generator
 
 
 
-Overview:
+## Overview:
 
 A simple application that generates password for the user. 
 
 
-Actions:
+## Actions:
 
 The application will generate password based on some rules.
 
@@ -19,16 +19,16 @@ The length of the password and how many uppercase, lowercase, symbols, digits an
 
 Inbuilt random number generators should not be used in the final version
 
-Output:
+## Output:
 
 A password which is hard to guess
 
 
-Technologies used:
+## Technologies used:
 
-Just basic python is enough to make the generator. For the user interface we can just use tkinter.
+Just basic python is enough to make the generator. For the user interface we used streamlit.
 
-Important tasks:
+## Important tasks:
 
 1) Making a pseudo-random number generator that’s as close as to a real random number generator. For example we know that the more number of times we toss a coin in real life the more the probability of getting a head appears to converge to 0.5. 
 	
