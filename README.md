@@ -41,7 +41,7 @@ Just basic python is enough to make the generator. For the user interface we use
 
 
 ## How to run
-## Download repository
+### Download repository
 Click on code, download as zip and extract the zip file
   
 ### Install dependencies
