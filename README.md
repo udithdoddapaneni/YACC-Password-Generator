@@ -40,20 +40,20 @@ Just basic python is enough to make the generator. For the user interface we use
 2) The user interface
 
 
-## How to run
-### Download repository
+## How to Run
+### Download Repository
 - Click on code
 - Download as zip
 - Extract the zip file
   
-### Install dependencies
+### Install Dependencies
 The necessary packages for running the scripts are mentioned in the requirements.txt file.
 ```
 pip install -r requirements.txt
 ```
 Custom packages are present inside _CustomRandom_ folder
 
-### Run the application
+### Run the Application
 To run the following command in terminal to open the interface 
 ```
 streamlit run Interface.py
