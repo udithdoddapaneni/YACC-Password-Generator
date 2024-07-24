@@ -41,7 +41,10 @@ Just basic python is enough to make the generator. For the user interface we use
 
 
 ## How to run
-### Prerequisites
+## Download repository
+Click on code, download as zip and extract the zip file
+  
+### Install dependencies
 The necessary packages for running the scripts are mentioned in the requirements.txt file.
 ```
 pip install -r requirements.txt
