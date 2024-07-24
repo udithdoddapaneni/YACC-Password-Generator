@@ -42,7 +42,9 @@ Just basic python is enough to make the generator. For the user interface we use
 
 ## How to run
 ### Download repository
-Click on code, download as zip and extract the zip file
+- Click on code
+- Download as zip
+- Extract the zip file
   
 ### Install dependencies
 The necessary packages for running the scripts are mentioned in the requirements.txt file.
