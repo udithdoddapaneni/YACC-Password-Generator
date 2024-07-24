@@ -103,7 +103,7 @@ with tab2:
         "This application was developed by 𝐘𝐞𝐭 𝐀𝐧𝐨𝐭𝐡𝐞𝐫 𝐂𝐨𝐝𝐢𝐧𝐠 𝐂𝐥𝐮𝐛 (𝐘𝐀𝐂𝐂) at 𝐈𝐈𝐓 𝐏𝐚𝐥𝐚𝐤𝐤𝐚𝐝."
     )
     st.write(
-        "We welcome any questions, feedback, or suggestions you might have. Your input helps us improve and innovate."
+        "We welcome any questions, feedback, or suggestions you might have. Your input helps us improve and innovate.\nContact us at yacc@iitpkd.ac.in"
     )
     st.write(
         "Thank you for using our Password Generator app. We hope it serves you well in generating secure and reliable passwords!"
