@@ -36,6 +36,14 @@ Just basic python is enough to make the generator. For the user interface we use
 	https://www.freecodecamp.org/news/random-number-generator/
 	https://www.math.arizona.edu/~tgk/mc/book_chap3.pdf
 
+	IMPLEMENTATION OF MERSENNE TWISTER
+	
+	- Initialization: The MersenneTwister class is initialized with a seed (default is 5489). The seed determines the starting point for the random number sequence.It initializes internal state variables, including an array MT of length n (624), to store the state of the generator. Various constants and masks are also set.
+	- Twisting: The twist method updates the internal state array MT to generate the next n values in the sequence. This involves a series of bitwise operations and shifts, mixing the current state to produce new values.
+	- Extracting Numbers: The extract_number method retrieves a tempered value from the MT array, ensuring the generator produces different numbers over time. It applies additional bitwise transformations to the state.
+	- Random Integer Generation: The selfimplemented randint method generates a random integer within a specified range [a, b] using the extracted numbers.
+	- Seeding with Current Time: The generator is seeded with the current timestamp, making it unpredictable for each run.
+
 
 2) The user interface
 
